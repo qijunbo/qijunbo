@@ -14,7 +14,7 @@ chkconfig servicenam.sh off / on
 		<th>Server</th>
 		<th>Service in chkconfig list</th>
 	</tr>
-	<tr class="table-row">
+	<tr  >
 		<td> Tomcat </td>
 		<td>
 		tomcat.sh
@@ -26,7 +26,7 @@ chkconfig servicenam.sh off / on
 ./opt/apache-tomcat-7.0.62/bin/startup.sh
 		</pre></td>
 	</tr>
-	<tr class="table-row">
+	<tr  >
 		<td><b><i>oak</i></b></td>
 		<td>
 		<pre>
@@ -49,7 +49,7 @@ su - wbiadmin -c &quot;mqsistart ESB_BROKER&quot;
 		service httpd start</td>
 	</tr>
 	
-		<tr class="table-row">
+		<tr  >
 		<td><b><i>spruce</i></b></td>
 		<td>#!/bin/sh<br>
 		# chkconfig: 2345 99 01<br>
@@ -68,7 +68,7 @@ su - wbiadmin -c &quot;mqsistart ESB_BROKER&quot;
 		service httpd start</td>
 	</tr>
 	
-	<tr class="table-row">
+	<tr  >
 		<td><b><i>SugarCRM A</i></b></td>
 		<td>#!/bin/sh<br>
 		# chkconfig: 2345 99 01<br>
@@ -86,7 +86,7 @@ su - wbiadmin -c &quot;mqsistart ESB_BROKER&quot;
 		<br>
 		service httpd start</td>
 	</tr>
-	<tr class="table-row">
+	<tr  >
 		<td><b><i>SugarCRM B</i></b></td>
 		<td>#!/bin/sh<br>
 		# chkconfig: 2345 99 01<br>
@@ -104,7 +104,7 @@ su - wbiadmin -c &quot;mqsistart ESB_BROKER&quot;
 		<br>
 		service httpd start</td>
 	</tr>
-	<tr class="table-row">
+	<tr  >
 		<td><b><font color="#C83030">Driver Portal A</font></b></td>
 		<td>#!/bin/sh<br>
 		# chkconfig: 2345 99 01<br>
@@ -122,7 +122,7 @@ su - wbiadmin -c &quot;mqsistart ESB_BROKER&quot;
 		<br>
 		service httpd start</td>
 	</tr>
-	<tr class="table-row">
+	<tr  >
 		<td><b><font color="#00CC00">CTP A</font></b></td>
 		<td>#!/bin/sh<br>
 		# chkconfig: 2345 99 01<br>
@@ -140,7 +140,7 @@ su - wbiadmin -c &quot;mqsistart ESB_BROKER&quot;
 		<br>
 		service httpd start</td>
 	</tr>
-	<tr class="table-row">
+	<tr  >
 		<td><b>HADR,DB2 A</b></td>
 		<td><b><font color="#FF0000">#[root@palm init.d]# cat db2primary.sh<br>
 		</font></b><br>
@@ -160,7 +160,7 @@ su - wbiadmin -c &quot;mqsistart ESB_BROKER&quot;
 		#su - db2inst1 -c &quot;db2 start hadr on db SUGARCRM as standby&quot;<br>
 		#su - db2inst2 -c &quot;db2 start hadr on db EVECTP as standby&quot;</td>
 	</tr>
-	<tr class="table-row">
+	<tr  >
 		<td><b>HADR,DB2 B</b></td>
 		<td><b><font color="#FF0000">#[root@banyan init.d]# cat db2standby.sh</font></b><p>
 		#!/bin/sh<br>

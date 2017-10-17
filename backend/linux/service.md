@@ -9,13 +9,13 @@ chkconfig servicenam.sh off / on
 
 ```
  
-<table border="0" cellpadding="3" cellspacing="1" class="framing-table" id="table1">
+<table>
 	<tr>
 		<th>Server</th>
 		<th>Service in chkconfig list</th>
 	</tr>
 	<tr class="table-row">
-		<td><b><i>Tomcat</i></b></td>
+		<td> Tomcat </td>
 		<td>
 		tomcat.sh
 		<pre>

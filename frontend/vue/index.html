@@ -17,7 +17,7 @@
 	 <p v-if="seen">现在你看到我了</p>
      <p>object.{{message}} 的值是: {{xxxdd}}</p>
     <i-button @click="show">Click me!</i-button>
-    <Modal v-model="visible" title="Welcome">Welcome to iView</Modal>
+    <Modal v-model="visible" title="Welcome">{{message}}</Modal>
 
 	<table class="table table-responsive table-hover">
         <tr v-for="(value, key, index) in object">
@@ -46,7 +46,6 @@
             <th>创建时间</th>
             <th>状态</th>
             <th>id</th>
-            <th> &nbsp;</th>
         </tr>
         <tr v-for=" c in containers">
             <td> {{c.name}}</td> 
@@ -58,31 +57,53 @@
             <td> {{c.rebootDate}} </td>
             <td> {{c.status}} </td>
             <td> {{c.id}} </td>
-            <td>  <i-button @click="remove(c.id)">Click me!</i-button> </td>
         </tr>    
     </table>    
-	 
+
+    <table class="table table-responsive table-hover">
+        <tr>
+            <th>id</th>
+            <th>产品名称</th>
+            <th>所有者</th>
+            <th>访问链接</th>
+            <th>内存</th>
+            <th>cpu</th>
+            <th>状态</th>
+            <th> &nbsp;</th>
+        </tr>
+        <tr v-for=" p in products">
+            <td>{{p.id}} </td>
+            <td>{{p.type}} </td>
+            <td>{{p.owner}} </td>
+            <td><a href="http://{{p.ip}}:{{p.port}}/{{p.context}}" target="_new">http://{{p.ip}}:{{p.port}}/{{p.context}}</a></td>
+            <td>{{p.memory}} </td>
+            <td>{{p.cpu}} </td>
+            <td>{{p.status}} </td>
+            
+            <td class="col-sm-2 text-center"> 
+                    <div class="btn-group">
+                        <span class="glyphicon glyphicon-th-list dropdown-toggle "
+                            data-toggle="dropdown"><span class="caret"></span> </span>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="divider"></li>
+                            <li><a @click="start(p.id)" title="edit"><span class="glyphicon glyphicon-pencil">&nbsp; 启动 </span></a></li>
+                            <li><a @click="restart(p.id)" ><span class="glyphicon glyphicon-remove">&nbsp;</span>重启</a></li>
+                            <li class="divider"></li>
+                            <li><a @click="stop(p.id)" ><span class="glyphicon glyphicon-remove">&nbsp;</span>停止</a></li>
+                        </ul>
+            </td>
+
+        </tr>
+    </table>
 </div>
 <script>
 
-    axios({
-      method:'get',
-      url:'http://118.190.153.23/remoteclient/containers',
-      responseType:'string'
-    })
-      .then(function(response) {
-         vm.containers = response.data;
-    });
-
-    Vue.component('todo-item', {
-      props: ['todo'],
-      template: '<tr><td>{{ todo.text }}</td><td>又是一个华而不实的用法.</td><td> 然而表格的样式还没有生效 </td></tr>'
-    })
 
    var vm = new Vue({
         el: '#app',
         data: {
             containers: "", 
+            products: "",
             object: {
                   name: '菜鸟教程',
                   url: 'http://www.runoob.com',
@@ -103,9 +124,61 @@
                 this.message = JSON.stringify(key);
                 this.xxxdd = JSON.stringify(  this.object[key]);
                 this.object[key] = '你妈个比的, 终于能跑通了.'
-            }
+            },
+
+            start: function (key) {
+                this.message = JSON.stringify(key);
+                axios.post('http://118.190.153.23/remoteclient/product/lims/'+ key +'/restart', {
+                    firstName: 'Fred',
+                    lastName: 'Flintstone'
+                  })
+                  .then(function (response) {
+                    console.log(response.data);
+                    this.message = "创建成功, 请勿重复创建.";
+                    this.visible = true;
+
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+                
+            },
+            restart: function (key) {
+                this.message = JSON.stringify(key);
+            },
+            stop: function (key) {
+                this.message = JSON.stringify(key);
+            },
         }
     })
+
+    Vue.component('todo-item', {
+      props: ['todo'],
+      template: '<tr><td>{{ todo.text }}</td><td>又是一个华而不实的用法.</td><td> 然而表格的样式还没有生效 </td></tr>'
+    })
+
+
+    axios({
+      method:'get',
+      url:'http://118.190.153.23/remoteclient/containers',
+    })
+      .then(function(response) {
+         vm.containers = response.data;
+    });
+
+
+
+    axios({
+      method:'get',
+      url:'http://118.190.153.23/remoteclient/product/lims',
+    })
+      .then(function(response) {
+         vm.products = response.data;
+    });
+
+ 
+
+
   </script>
 </body>
 </html>

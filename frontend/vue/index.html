@@ -4,37 +4,94 @@
     <meta charset="utf-8">
     <title>iview example</title>
     <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
-    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="http://unpkg.com/iview/dist/iview.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 </head>
 <body>
 <div id="app">
-	
 	 <p v-if="seen">现在你看到我了</p>
      <p>object.{{message}} 的值是: {{xxxdd}}</p>
     <i-button @click="show">Click me!</i-button>
     <Modal v-model="visible" title="Welcome">Welcome to iView</Modal>
+
 	<table class="table table-responsive table-hover">
         <tr v-for="(value, key, index) in object">
             <td>{{index}}</td> <td> {{key}}</td> <td> {{value}}</td> <td>  <i-button @click="remove(key)">Click me!</i-button> </td>
         </tr>
     <table>
+
+    <table class="table table-responsive table-hover">
+        <tbody>
+        <todo-item
+          v-for="item in groceryList"
+          v-bind:todo="item"
+          v-bind:key="item.id">
+        </todo-item>
+        </tbody>
+    </table>
+
+    <table class="table table-responsive table-hover">
+        <tr>
+            <th>名称</th>
+            <th>产品id</th>
+            <th>所有者</th>
+            <th>内部ip:端口</th>
+            <th>创建时间</th>
+            <th>类型</th>
+            <th>创建时间</th>
+            <th>状态</th>
+            <th>id</th>
+            <th> &nbsp;</th>
+        </tr>
+        <tr v-for=" c in containers">
+            <td> {{c.name}}</td> 
+            <td> {{c.productId}}</td>
+            <td> {{c.owner}}</td> 
+            <td> {{c.ip}}:{{c.port}}</td> 
+            <td> {{c.createDate}} </td>
+            <td> {{c.type}} </td>
+            <td> {{c.rebootDate}} </td>
+            <td> {{c.status}} </td>
+            <td> {{c.id}} </td>
+            <td>  <i-button @click="remove(c.id)">Click me!</i-button> </td>
+        </tr>    
+    </table>    
+	 
 </div>
 <script>
-    new Vue({
+
+    axios({
+      method:'get',
+      url:'http://118.190.153.23/remoteclient/containers',
+      responseType:'string'
+    })
+      .then(function(response) {
+         vm.containers = response.data;
+    });
+
+    Vue.component('todo-item', {
+      props: ['todo'],
+      template: '<tr><td>{{ todo.text }}</td><td>又是一个华而不实的用法.</td><td> 然而表格的样式还没有生效 </td></tr>'
+    })
+
+   var vm = new Vue({
         el: '#app',
         data: {
+            containers: "", 
             object: {
                   name: '菜鸟教程',
                   url: 'http://www.runoob.com',
                   slogan: '学的不仅是技术，更是梦想！'
             },
+            groceryList: [ { id: 0, text: '蔬菜' }, { id: 1, text: '奶酪' }, { id: 2, text: '随便其他什么人吃的东西' }] ,
             xxxdd : 'debug information .',
             visible: false,
-			message: '我日你个妈!',
+			message: 'http://118.190.153.23/remoteclient/containers',
 			seen: true
         },
         methods: {

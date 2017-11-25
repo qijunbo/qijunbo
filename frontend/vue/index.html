@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>iview example</title>
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div id="app">
+	
+	 <p v-if="seen">现在你看到我了</p>
+     <p>object.{{message}} 的值是: {{xxxdd}}</p>
+    <i-button @click="show">Click me!</i-button>
+    <Modal v-model="visible" title="Welcome">Welcome to iView</Modal>
+	<table class="table table-responsive table-hover">
+        <tr v-for="(value, key, index) in object">
+            <td>{{index}}</td> <td> {{key}}</td> <td> {{value}}</td> <td>  <i-button @click="remove(key)">Click me!</i-button> </td>
+        </tr>
+    <table>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            object: {
+                  name: '菜鸟教程',
+                  url: 'http://www.runoob.com',
+                  slogan: '学的不仅是技术，更是梦想！'
+            },
+            xxxdd : 'debug information .',
+            visible: false,
+			message: '我日你个妈!',
+			seen: true
+        },
+        methods: {
+            show: function () {
+                this.visible = true;
+                this.seen = ! this.seen
+            },
+            remove: function (key) {
+                this.message = JSON.stringify(key);
+                this.xxxdd = JSON.stringify(  this.object[key]);
+                this.object[key] = '你妈个比的, 终于能跑通了.'
+            }
+        }
+    })
+  </script>
+</body>
+</html>

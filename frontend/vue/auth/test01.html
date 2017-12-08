@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-3.2.1.min.js"></script>
+    <script src="./jquery.base64.js"></script>
+</head>
+
+<body>
+    <script>
+        var username = 'kermit',
+            password = 'kermit';
+
+        $.ajax({
+            type: "GET",
+            dataType:"jsonp",
+            url: "http://192.168.2.76:80/v2/api-docs",
+            beforeSend: function (request) {
+                request.setRequestHeader("Authorization", "Basic " + btoa("kermit:kermit"));
+            },
+            success: function (result) {
+                console.log(result.apiVersion);
+            }
+        });
+		
+		
+		
+$.ajax({
+	type: "GET",
+	//dataType:"jsonp",
+	url: "http://192.168.2.76:8003/product/lims",
+	beforeSend: function (request) {
+		request.setRequestHeader( Authorization, "Basic " + btoa("lims:sunway123#"));
+	},
+	success: function (result) {
+		console.log(result.apiVersion);
+	}
+});
+    </script>
+</body>
+
+</html>

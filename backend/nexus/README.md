@@ -76,11 +76,12 @@ http://localhost:8081
 
 the default user name/password is ``` admin/admin123    ```
 
-don't forget to change them here.
+don't forget to change them here.  [qijunbo123#]
 
 ![change](change.png)
  
 
+ 
 And you can choose to sync the jars from manven central to local server like this.
 
 I chose aliyun as the default server,  it's pretty fast in China.  But you can keep the default value and not change it.
@@ -88,10 +89,31 @@ I chose aliyun as the default server,  it's pretty fast in China.  But you can k
 ![setting](setting.png)
 
 
+### Forget Password
 
+Open  ``` /usr/nexus/nexus-2.14.5-02/conf/security.xml ``` and find this section,  and change the password value to ``` f865b53623b121fd34ee5426c792e5c33af8c227 ``` , then the password is reset to ``` admin123 ``` 
+```
+ <user>
+      <id>admin</id>
+      <firstName>Administrator</firstName>
+      <lastName>User</lastName>
+      <password>$shiro1$SHA-512$1024$3+ELe1C+iampCnu74tz4dw==$Yk7uIZsHCTXwFkjCA0zdgKu/pZAaENiCu59OCJfdRwBEfxh/szejMlr45tvX+zhZdFZvLoqphLT7I1t7pj1yDw==</password>
+      <status>active</status>
+      <email>changeme@yourcompany.com</email>
+ </user>
+```
 
+Restart the nexus server.
 
+```
+su - nexus
+/usr/nexus/nexus-2.14.5-02/bin/nexus restart
+```
 
+you can even change the  admin user id to some other value,  so that other people can not guess the admin login id.
+
+Reference:
+--
 
 中文版安装指南：
 
@@ -102,8 +124,11 @@ http://www.cnblogs.com/h--d/p/5717920.html
 http://blog.csdn.net/HUXU981598436/article/details/54945589
 
 
-
 http://blog.csdn.net/xiaoreqing/article/details/51352751
 
 
 http://blog.csdn.net/shenshen123jun/article/details/9084293
+
+忘记密码:
+
+https://support.sonatype.com/hc/en-us/articles/213465508-How-can-I-reset-a-forgotten-admin-password-

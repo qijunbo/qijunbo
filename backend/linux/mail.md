@@ -23,7 +23,7 @@ yum -y install sendmail
 systemctl enable sendmail
 systemctl start sendmail
 ```
-
+>  注意,  防火墙端口设置, 否则发不出去.(还没搞清楚)
 
 3.  发送
 --

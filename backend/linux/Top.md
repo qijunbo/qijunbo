@@ -12,3 +12,8 @@ W 保存
 B 加粗
 
 z 颜色
+
+
+Reference:
+
+https://tecadmin.net/understanding-linux-top-command-results-uses/
